@@ -1,0 +1,19 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: silver;
+}
+
+.container {
+  max-width: 992px;
+  max-height: auto;
+  margin: 0 auto;
+}
+
+#spaceship {
+  width: 7rem;
+  height: auto;
+}
