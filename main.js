@@ -1,18 +1,38 @@
 var position = {
-  top: 1,
-  left: 1
+  moving: false,
+  x: 1,
+  y: 1
 };
-
-var space = false;
 
 var $car = document.getElementById('car');
 
 function updatePosition() {
-  if (space) {
-    return space;
+  if (position.moving) {
+    position.moving = false;
   } else {
-    if ($car.class === 'west') {
-      position.top = position.top + 1;
+    position.moving = true;
+    var intervalID = setInterval(callback, 160);
+  }
+  function callback() {
+    var $car = document.getElementById('car');
+    if (!position.moving) {
+      clearInterval(intervalID);
+    }
+    if ($car.className === 'west') {
+      position.x += 10;
+      $car.style.left = position.x + 'px';
+    }
+    if ($car.className === 'east') {
+      position.x -= 10;
+      $car.style.left = position.x + 'px';
+    }
+    if ($car.className === 'north') {
+      position.y -= 10;
+      $car.style.top = position.y + 'px';
+    }
+    if ($car.className === 'south') {
+      position.y += 10;
+      $car.style.top = position.y + 'px';
     }
   }
 }
@@ -30,9 +50,8 @@ window.addEventListener('keydown', function (event) {
   if (event.key === 'ArrowLeft') {
     $car.setAttribute('class', 'east');
   }
-  if (event.key === 'Space') {
+  if (event.key === ' ') {
     updatePosition();
-
   }
 
 });
